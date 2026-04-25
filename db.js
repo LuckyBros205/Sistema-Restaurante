@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+const mysql = require('mysql'); // Usamos mysql seca, sin el 2
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -7,16 +7,16 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME,
     port: process.env.DB_PORT || 10240,
     ssl: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false // Esto es vital para Aiven
     }
 });
 
 db.connect((err) => {
     if (err) {
-        console.error('Error conectando a la base de datos:', err);
+        console.error('Error de conexion:', err.message);
         return;
     }
-    console.log('Conectado exitosamente a la base de datos de Aiven');
+    console.log('--- CONECTADO A AIVEN EXITOSAMENTE ---');
 });
 
 module.exports = db;
