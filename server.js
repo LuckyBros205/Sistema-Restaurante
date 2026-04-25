@@ -252,4 +252,6 @@ process.on('SIGINT', () => {
     process.exit(0);
 });
 
+console.log("MYSQL2 VERSION:", require('mysql2/package.json').version);
+
 startServer(); 
