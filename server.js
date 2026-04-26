@@ -254,4 +254,14 @@ process.on('SIGINT', () => {
 
 console.log("MYSQL2 VERSION:", require('mysql2/package.json').version);
 
+// Maneja los reportes de ventas a clientes
+app.get('/reportes', async (req, res) => {
+    try {
+        const [rows] = await db.query("SELECT * FROM ventas ORDER BY fecha_venta DESC");
+        res.render('reportes', { ventas: rows, filtro: {} });
+    } catch (err) {
+        res.status(500).send("Error al cargar reportes");
+    }
+});
+
 startServer(); 
